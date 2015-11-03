@@ -1,0 +1,6 @@
+"Simple String" = "Translation of simple string (alternative file)";
+"With sorting %@, %@, and %@." = "end: %3$@, mid: %2$@, start: %1$@";
+
+"String1" = "MUST NEVER TRANSLATE (String1)";
+"String2" = "MUST NEVER TRANSLATE (String2)";
+"42" = "MUST NEVER TRANSLATE (42)";
