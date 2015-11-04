@@ -16,42 +16,43 @@ import Foundation
  - Localized: An instance that has been localized.
  - Segment:   An instance that holds a segment of an interpolated string.
  */
-enum DHLocalizedString : StringInterpolationConvertible, StringLiteralConvertible, CustomDebugStringConvertible, CustomStringConvertible {
+enum DHLocalizedStringStore : StringInterpolationConvertible, StringLiteralConvertible, CustomDebugStringConvertible, CustomStringConvertible {
     static var mainBundle = NSBundle.mainBundle()
 
-    // case Localized(localizedString: String)
+    // Kinds of strings
+
     case StringLiteral(literal: String, tableName: String?, bundle: NSBundle)
-    case StringInterpolation(strings: [DHLocalizedString], tableName: String?, bundle: NSBundle)
+    case StringInterpolation(strings: [DHLocalizedStringStore], tableName: String?, bundle: NSBundle)
     case Segment(data: Any)
 
-    // StringLiteralConvertible
+    // MARK: StringLiteralConvertible
 
     typealias ExtendedGraphemeClusterLiteralType = StringLiteralType
     typealias UnicodeScalarLiteralType = StringLiteralType
 
     init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
-        self = .StringLiteral(literal: "\(value)", tableName: nil, bundle: DHLocalizedString.mainBundle)
+        self = .StringLiteral(literal: "\(value)", tableName: nil, bundle: DHLocalizedStringStore.mainBundle)
     }
 
     init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
-        self = .StringLiteral(literal: "\(value)", tableName: nil, bundle: DHLocalizedString.mainBundle)
+        self = .StringLiteral(literal: "\(value)", tableName: nil, bundle: DHLocalizedStringStore.mainBundle)
     }
 
     init(stringLiteral value: StringLiteralType) {
-        self = .StringLiteral(literal: "\(value)", tableName: nil, bundle: DHLocalizedString.mainBundle)
+        self = .StringLiteral(literal: "\(value)", tableName: nil, bundle: DHLocalizedStringStore.mainBundle)
     }
 
-    // StringInterpolationConvertible
+    // MARK: StringInterpolationConvertible
 
-    init(stringInterpolation strings: DHLocalizedString...) {
-        self = .StringInterpolation(strings: strings, tableName: nil, bundle: DHLocalizedString.mainBundle)
+    init(stringInterpolation strings: DHLocalizedStringStore...) {
+        self = .StringInterpolation(strings: strings, tableName: nil, bundle: DHLocalizedStringStore.mainBundle)
     }
 
     init<T>(stringInterpolationSegment expr: T) {
         self = .Segment(data: expr)
     }
 
-    // CustomStringConvertible
+    // MARK: CustomStringConvertible
 
     var description: String {
         switch self {
@@ -87,20 +88,20 @@ enum DHLocalizedString : StringInterpolationConvertible, StringLiteralConvertibl
         }
     }
 
-    // CustomDebugStringConvertible
+    // MARK: CustomDebugStringConvertible
 
     var debugDescription: String {
         switch self {
         case StringLiteral(let string, let tableName, let bundle):
-            return "[DHLocalizedString.StringLiteral(\(string), \(tableName), \(bundle)) -> \(self.description)]"
+            return "[DHLocalizedStringStore.StringLiteral(\(string), \(tableName), \(bundle)) -> \(self.description)]"
         case StringInterpolation(let strings, let tableName, let bundle):
-            return "[DHLocalizedString.StringInterpolation(\(strings), \(tableName), \(bundle)) -> \(self.description)]"
+            return "[DHLocalizedStringStore.StringInterpolation(\(strings), \(tableName), \(bundle)) -> \(self.description)]"
         case Segment(let data):
-            return "[DHLocalizedString.Segment(\(data)]"
+            return "[DHLocalizedStringStore.Segment(\(data)]"
         }
     }
 
-    // Custom
+    // MARK: Custom function
 
     var string: String {
         switch self {
@@ -116,44 +117,66 @@ enum DHLocalizedString : StringInterpolationConvertible, StringLiteralConvertibl
     }
 }
 
+// MARK: Postfix operator
+
 postfix operator |~ { }
-postfix func |~ (value: DHLocalizedString) -> String {
+postfix func |~ (value: DHLocalizedStringStore) -> String {
     return value.description
 }
 
+// MARK: Infix operator
+
 infix operator |~ {}
-func |~ (left: DHLocalizedString, bundle: (NSBundle)) -> String {
+func |~ (left: DHLocalizedStringStore, bundle: (NSBundle)) -> String {
     switch left {
     case .StringLiteral(let literal, let tableName, _):
-        return DHLocalizedString.StringLiteral(literal: literal, tableName: tableName, bundle: bundle).description
+        return DHLocalizedStringStore.StringLiteral(literal: literal, tableName: tableName, bundle: bundle).description
     case .StringInterpolation(let strings, let tableName, _):
-        return DHLocalizedString.StringInterpolation(strings: strings, tableName: tableName, bundle: bundle).description
+        return DHLocalizedStringStore.StringInterpolation(strings: strings, tableName: tableName, bundle: bundle).description
     case .Segment(_):
         return left.description
     }
 }
-func |~ (left: DHLocalizedString, tableNameAndBundle: (String, NSBundle)) -> String {
+func |~ (left: DHLocalizedStringStore, tableNameAndBundle: (String, NSBundle)) -> String {
     let (tableName, bundle) = tableNameAndBundle
 
     switch left {
     case .StringLiteral(let literal, _, _):
-        return DHLocalizedString.StringLiteral(literal: literal, tableName: tableName, bundle: bundle).description
+        return DHLocalizedStringStore.StringLiteral(literal: literal, tableName: tableName, bundle: bundle).description
     case .StringInterpolation(let strings, _, _):
-        return DHLocalizedString.StringInterpolation(strings: strings, tableName: tableName, bundle: bundle).description
+        return DHLocalizedStringStore.StringInterpolation(strings: strings, tableName: tableName, bundle: bundle).description
     case .Segment(_):
         return left.description
     }
 }
-func |~ (left: DHLocalizedString, tableName: (String)) -> String {
+func |~ (left: DHLocalizedStringStore, tableName: (String)) -> String {
     switch left {
     case .StringLiteral(let literal, _, let bundle):
-        return DHLocalizedString.StringLiteral(literal: literal, tableName: tableName, bundle: bundle).description
+        return DHLocalizedStringStore.StringLiteral(literal: literal, tableName: tableName, bundle: bundle).description
     case .StringInterpolation(let strings, _, let bundle):
-        return DHLocalizedString.StringInterpolation(strings: strings, tableName: tableName, bundle: bundle).description
+        return DHLocalizedStringStore.StringInterpolation(strings: strings, tableName: tableName, bundle: bundle).description
     case .Segment(_):
         return left.description
     }
 }
-func |~ (left: DHLocalizedString, rhs: Void) -> String {
+func |~ (left: DHLocalizedStringStore, rhs: Void) -> String {
     return left.description
+}
+
+// MARK: Functional interface
+
+func DHLocalizedString(string: DHLocalizedStringStore, tableName: String? = nil, bundle: NSBundle? = nil) -> String {
+    if let tableName = tableName {
+        if let bundle = bundle {
+            return string |~ (tableName, bundle)
+        } else {
+            return string |~ (tableName)
+        }
+    }
+
+    if let bundle = bundle {
+        return string |~ (bundle)
+    }
+
+    return string |~ ()
 }

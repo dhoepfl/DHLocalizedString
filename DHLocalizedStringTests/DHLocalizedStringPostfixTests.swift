@@ -17,7 +17,7 @@ class DHLocalizedStringPostfixTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        DHLocalizedString.mainBundle = NSBundle(forClass: DHLocalizedStringPostfixTests.self);
+        DHLocalizedStringStore.mainBundle = NSBundle(forClass: DHLocalizedStringPostfixTests.self);
     }
 
     func testSimpleExample() {

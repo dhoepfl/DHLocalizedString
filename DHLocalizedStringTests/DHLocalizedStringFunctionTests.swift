@@ -1,5 +1,5 @@
 //
-//  DHLocalizedStringInfixTests.swift
+//  DHLocalizedStringFunctionTests.swift
 //  DHLocalizedString
 //
 //  Created by Daniel Höpfl on 02.11.15.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import DHLocalizedString
 
-class DHLocalizedStringInfixTests: XCTestCase {
+class DHLocalizedStringFunctionTests: XCTestCase {
     let x = "String1"
     let y = "String2"
     let z = 42
@@ -19,16 +19,16 @@ class DHLocalizedStringInfixTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        DHLocalizedStringStore.mainBundle = NSBundle(forClass: DHLocalizedStringInfixTests.self);
+        DHLocalizedStringStore.mainBundle = NSBundle(forClass: DHLocalizedStringFunctionTests.self);
 
         let path = DHLocalizedStringStore.mainBundle.resourcePath!
         alternativeBundle = NSBundle(path: path + "/DHLocalizedStringAlternative.bundle")!
     }
 
     func testSimpleExampleFromAlternativeFile() {
-        let result = "Simple String" |~ "Alternative"
+        let result = DHLocalizedString("Simple String", tableName: "Alternative")
 
-        print("   Input: \"Simple String\" |~ \"Alternative\"")
+        print("   Input: DHLocalizedString(\"Simple String\", tableName: \"Alternative\")")
         print("Expected: Translation of simple string (alternative file)")
         print("  Result: \(result)")
         print("")
@@ -38,9 +38,9 @@ class DHLocalizedStringInfixTests: XCTestCase {
     }
 
     func testSimpleExampleFromAlternativeBundle() {
-        let result = "Simple String" |~ alternativeBundle
+        let result = DHLocalizedString("Simple String", bundle: alternativeBundle)
 
-        print("   Input: \"Simple String\" |~ alternativeBundle")
+        print("   Input: DHLocalizedString(\"Simple String\", bundle: alternativeBundle)")
         print("Expected: Translation in Alternative Bundle")
         print("  Result: \(result)")
         print("")
@@ -51,9 +51,9 @@ class DHLocalizedStringInfixTests: XCTestCase {
 
 
     func testSimpleExampleFromAlternativeFileAndBundle() {
-        let result = "Simple String" |~ ("Alternative", alternativeBundle)
+        let result = DHLocalizedString("Simple String", tableName: "Alternative", bundle: alternativeBundle)
 
-        print("   Input: \"Simple String\" |~ (\"Alternative\", alternativeBundle)")
+        print("   Input: DHLocalizedString(\"Simple String\", tableName: \"Alternative\", bundle: alternativeBundle))")
         print("Expected: Translation in Alternative Bundle, Alternative file")
         print("  Result: \(result)")
         print("")
@@ -63,7 +63,7 @@ class DHLocalizedStringInfixTests: XCTestCase {
     }
 
     func testSimpleExampleFromMainFileAndBundle() {
-        let result = "Simple String" |~ ()
+        let result = DHLocalizedString("Simple String")
 
         print("   Input: \"Simple String\" |~ ()")
         print("Expected: This is a translation of a simple string")
@@ -75,7 +75,7 @@ class DHLocalizedStringInfixTests: XCTestCase {
     }
 
     func testArgumentsExampleFromAlternativeFile() {
-        let result = "With sorting \(x), \(y), and \(z)." |~ "Alternative"
+        let result = DHLocalizedString("With sorting \(x), \(y), and \(z).", tableName: "Alternative")
 
         print("   Input: \"With sorting \\(x), \\(y), and \\(z).\" |~ \"Alternative\"")
         print("     Key: With sorting %@, %@, and %@.")

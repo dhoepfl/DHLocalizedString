@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC4B8A8E1BE9F03300C48A44 /* DHLocalizedStringFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B8A8D1BE9F03300C48A44 /* DHLocalizedStringFunctionTests.swift */; };
+		AC4B8A8F1BE9F03300C48A44 /* DHLocalizedStringFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B8A8D1BE9F03300C48A44 /* DHLocalizedStringFunctionTests.swift */; };
 		AC8354C91BE808780015B0A1 /* Alternative.strings in Resources */ = {isa = PBXBuildFile; fileRef = AC8354C61BE808780015B0A1 /* Alternative.strings */; };
 		AC8354CB1BE808780015B0A1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AC8354C81BE808780015B0A1 /* Localizable.strings */; };
 		AC8354D11BE80A310015B0A1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AC8354C81BE808780015B0A1 /* Localizable.strings */; };
@@ -61,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC4B8A8D1BE9F03300C48A44 /* DHLocalizedStringFunctionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DHLocalizedStringFunctionTests.swift; path = DHLocalizedStringTests/DHLocalizedStringFunctionTests.swift; sourceTree = SOURCE_ROOT; };
 		AC8353FC1BE7DD440015B0A1 /* DHLocalizedStringAlternative.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DHLocalizedStringAlternative.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC83549B1BE7F9300015B0A1 /* DHLocalizedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DHLocalizedString.swift; sourceTree = "<group>"; };
 		AC8354BB1BE807590015B0A1 /* DHLocalizedString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHLocalizedString.h; sourceTree = "<group>"; };
@@ -170,6 +173,7 @@
 			children = (
 				AC8354C01BE808560015B0A1 /* DHLocalizedStringPostfixTests.swift */,
 				AC8354BF1BE808560015B0A1 /* DHLocalizedStringInfixTests.swift */,
+				AC4B8A8D1BE9F03300C48A44 /* DHLocalizedStringFunctionTests.swift */,
 				AC8354C51BE808660015B0A1 /* Info.plist */,
 				AC8B37FB1BE89C1200F72894 /* Localizable.strings */,
 				AC8B37F81BE89C0600F72894 /* Alternative.strings */,
@@ -444,6 +448,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC8355281BE80CF80015B0A1 /* DHLocalizedStringInfixTests.swift in Sources */,
+				AC4B8A8E1BE9F03300C48A44 /* DHLocalizedStringFunctionTests.swift in Sources */,
 				AC8355291BE80CFA0015B0A1 /* DHLocalizedStringPostfixTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,6 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC83555C1BE80EBE0015B0A1 /* DHLocalizedStringInfixTests.swift in Sources */,
+				AC4B8A8F1BE9F03300C48A44 /* DHLocalizedStringFunctionTests.swift in Sources */,
 				AC83555D1BE80EC00015B0A1 /* DHLocalizedStringPostfixTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -2,6 +2,8 @@
 
 This is an idea on how to implement NSLocalizedString string localization in Swift.
 
+
+
 # Usage
 
 Given the `Localizable.strings` file:
@@ -9,6 +11,7 @@ Given the `Localizable.strings` file:
 ```
    "%@ loves %@" = "%2$@ ♥️ %1$@";
 ```
+
 
 ## Simplyfied usage (postfix notation)
 
@@ -24,6 +27,7 @@ results in:
 ```
    localized = "Bob ♥️ Alice"
 ```
+
 
 ## Extended usage (infix notation)
 
@@ -60,6 +64,43 @@ There are four alternatives for the infix notation:
    let localized = "\(personA) loves \(personB)." |~ ("Flowerpower", bundle)
 ```
 … searches for the key "%@ loves %@" in `Flowerpower.strings` of the bundle with identifier `com.example.bundle`.
+
+
+## Functional usage
+
+### Default call
+
+```
+let localized = DHLocalizedString("\(personA) loves \(personB).")
+```
+
+… searches for the key "%@ loves %@" in `Localizable.strings` of `mainBundle()`.
+
+### Specific table call (use given table name in `mainBundle()`)
+
+```
+let localized = DHLocalizedString("\(personA) loves \(personB).", tableName: "Flowerpower")
+```
+
+… searches for the key "%@ loves %@" in `Flowerpower.strings` of `mainBundle()`.
+
+### Specific bundle call (use `Localizable.strings` from given bundle)
+
+```
+let bundle = NSBundle(identifier: "com.example.bundle")
+let localized = DHLocalizedString("\(personA) loves \(personB).", bundle: bundle)
+```
+… searches for the key "%@ loves %@" in `Localizable.strings` of the bundle with identifier `com.example.bundle`.
+
+### Fully specified call (use given table name in given bundle)
+
+```
+let bundle = NSBundle(identifier: "com.example.bundle")
+let localized = DHLocalizedString("\(personA) loves \(personB).", tableName: "Flowerpower", bundle: bundle)
+```
+… searches for the key "%@ loves %@" in `Flowerpower.strings` of the bundle with identifier `com.example.bundle`.
+
+
 
 # Notes
 
