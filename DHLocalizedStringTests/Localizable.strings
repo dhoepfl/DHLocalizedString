@@ -1,6 +1,6 @@
 "Simple String" = "This is a translation of a simple string";
-"With arguments %@, %@, and %@." = "Translation with three arguments: [%@], [%@], and [%@].";
-"With sorting %@, %@, and %@." = "Last: %3$@, First: %1$@, Second: %2$@";
+"With arguments %1$@, %2$@, and %3$@." = "Translation with three arguments: [%@], [%@], and [%@].";
+"With sorting %1$@, %2$@, and %3$@." = "Last: %3$@, First: %1$@, Second: %2$@";
 
 "String1" = "MUST NEVER TRANSLATE (String1)";
 "String2" = "MUST NEVER TRANSLATE (String2)";

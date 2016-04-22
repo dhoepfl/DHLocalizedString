@@ -9,7 +9,7 @@ This is an idea on how to implement NSLocalizedString string localization in Swi
 Given the `Localizable.strings` file:
 
 ```
-   "%@ loves %@" = "%2$@ ♥️ %1$@";
+   "%1$@ loves %2$@" = "%2$@ ♥️ %1$@";
 ```
 
 
@@ -39,7 +39,7 @@ There are four alternatives for the infix notation:
    let localized = "\(personA) loves \(personB)." |~ ()
 ```
 
-… searches for the key "%@ loves %@" in `Localizable.strings` of `mainBundle()`.
+… searches for the key "%1$@ loves %2$@" in `Localizable.strings` of `mainBundle()`.
 
 ### Specific table infix (use given table name in `mainBundle()`)
 
@@ -47,7 +47,7 @@ There are four alternatives for the infix notation:
    let localized = "\(personA) loves \(personB)." |~ ("Flowerpower")
 ```
 
-… searches for the key "%@ loves %@" in `Flowerpower.strings` of `mainBundle()`.
+… searches for the key "%1$@ loves %2$@" in `Flowerpower.strings` of `mainBundle()`.
 
 ### Specific bundle infix (use `Localizable.strings` from given bundle)
 
@@ -55,7 +55,7 @@ There are four alternatives for the infix notation:
    let bundle = NSBundle(identifier: "com.example.bundle")
    let localized = "\(personA) loves \(personB)." |~ (bundle)
 ```
-… searches for the key "%@ loves %@" in `Localizable.strings` of the bundle with identifier `com.example.bundle`.
+… searches for the key "%1$@ loves %2$@" in `Localizable.strings` of the bundle with identifier `com.example.bundle`.
 
 ### Fully specified infix (use given table name in given bundle)
 
@@ -63,7 +63,7 @@ There are four alternatives for the infix notation:
    let bundle = NSBundle(identifier: "com.example.bundle")
    let localized = "\(personA) loves \(personB)." |~ ("Flowerpower", bundle)
 ```
-… searches for the key "%@ loves %@" in `Flowerpower.strings` of the bundle with identifier `com.example.bundle`.
+… searches for the key "%1$@ loves %2$@" in `Flowerpower.strings` of the bundle with identifier `com.example.bundle`.
 
 
 ## Functional usage
@@ -74,7 +74,7 @@ There are four alternatives for the infix notation:
 let localized = DHLocalizedString("\(personA) loves \(personB).")
 ```
 
-… searches for the key "%@ loves %@" in `Localizable.strings` of `mainBundle()`.
+… searches for the key "%1$@ loves %2$@" in `Localizable.strings` of `mainBundle()`.
 
 ### Specific table call (use given table name in `mainBundle()`)
 
@@ -82,7 +82,7 @@ let localized = DHLocalizedString("\(personA) loves \(personB).")
 let localized = DHLocalizedString("\(personA) loves \(personB).", tableName: "Flowerpower")
 ```
 
-… searches for the key "%@ loves %@" in `Flowerpower.strings` of `mainBundle()`.
+… searches for the key "%1$@ loves %2$@" in `Flowerpower.strings` of `mainBundle()`.
 
 ### Specific bundle call (use `Localizable.strings` from given bundle)
 
@@ -90,7 +90,7 @@ let localized = DHLocalizedString("\(personA) loves \(personB).", tableName: "Fl
 let bundle = NSBundle(identifier: "com.example.bundle")
 let localized = DHLocalizedString("\(personA) loves \(personB).", bundle: bundle)
 ```
-… searches for the key "%@ loves %@" in `Localizable.strings` of the bundle with identifier `com.example.bundle`.
+… searches for the key "%1$@ loves %2$@" in `Localizable.strings` of the bundle with identifier `com.example.bundle`.
 
 ### Fully specified call (use given table name in given bundle)
 
@@ -98,7 +98,7 @@ let localized = DHLocalizedString("\(personA) loves \(personB).", bundle: bundle
 let bundle = NSBundle(identifier: "com.example.bundle")
 let localized = DHLocalizedString("\(personA) loves \(personB).", tableName: "Flowerpower", bundle: bundle)
 ```
-… searches for the key "%@ loves %@" in `Flowerpower.strings` of the bundle with identifier `com.example.bundle`.
+… searches for the key "%1$@ loves %2$@" in `Flowerpower.strings` of the bundle with identifier `com.example.bundle`.
 
 
 
@@ -106,6 +106,6 @@ let localized = DHLocalizedString("\(personA) loves \(personB).", tableName: "Fl
 
 The operator `|~` looks a bit like a flag.
 
-In your `Localizable.strings` file, replace all interpolations with `%@`, regardless of the type of the interpolation. Do not use `%@` as part of the key. You may use positional parameters in the translated string, as shown above.
+In your `Localizable.strings` file, replace all interpolations with `%n$@` (including positional number!), regardless of the type of the interpolation. Do not use `%@` as part of the key. You may use positional parameters in the translated string, as shown above.
 
 See [LICENSE](./LICENSE) for license information.

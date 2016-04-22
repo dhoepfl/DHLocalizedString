@@ -60,12 +60,14 @@ enum DHLocalizedStringStore : StringInterpolationConvertible, StringLiteralConve
             return bundle.localizedStringForKey(string, value: nil, table: tableName)
         case StringInterpolation(let strings, let tableName, let bundle):
             var toggle = true
+            var position = 0;
             let i18nString = strings.reduce("") {
                 wholeString, part in
 
                 toggle = !toggle
                 if toggle {
-                    return "\(wholeString)%@"
+                    position = position + 1
+                    return "\(wholeString)%\(position)$@"
                 } else {
                     return "\(wholeString)\(part.string)"
                 }

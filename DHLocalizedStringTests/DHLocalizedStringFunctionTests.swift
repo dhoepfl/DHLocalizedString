@@ -78,7 +78,7 @@ class DHLocalizedStringFunctionTests: XCTestCase {
         let result = DHLocalizedString("With sorting \(x), \(y), and \(z).", tableName: "Alternative")
 
         print("   Input: \"With sorting \\(x), \\(y), and \\(z).\" |~ \"Alternative\"")
-        print("     Key: With sorting %@, %@, and %@.")
+        print("     Key: With sorting %1$@, %2$@, and %3$@.")
         print("Expected: end: 42, mid: String2, start: String1")
         print("  Result: \(result)")
         print("")

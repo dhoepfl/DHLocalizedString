@@ -37,7 +37,7 @@ class DHLocalizedStringPostfixTests: XCTestCase {
         let result = "With arguments \(x), \(y), and \(z)."|~
 
         print("   Input: \"With arguments \\(x), \\(y), and \\(z).\"|~")
-        print("     Key: With arguments %@, %@, and %@.")
+        print("     Key: With arguments %1$@, %2$@, and %3$@.")
         print("Expected: Translation with three arguments: [String1], [String2], and [42].")
         print("  Result: \(result)")
         print("")
@@ -51,7 +51,7 @@ class DHLocalizedStringPostfixTests: XCTestCase {
         let result = "With sorting \(x), \(y), and \(z)."|~
 
         print("   Input: \"With sorting \\(x), \\(y), and \\(z).\"|~")
-        print("     Key: With sorting %@, %@, and %@.")
+        print("     Key: With sorting %1$@, %2$@, and %3$@.")
         print("Expected: Last: 42, First: String1, Second: String2")
         print("  Result: \(result)")
         print("")
